@@ -15,14 +15,14 @@ export default class extends Component {
 
         super(props);
 
-        let user_id = (Actions.user) ? Actions.user.users_id : -1;
-
-        console.log(user_id);
-        console.log(props.data.rate_user);
-
         this.state = {
             item:props.data
         };
+    }
+
+    componentWillReceiveProps(nextProps){
+
+        this.setState({item:nextProps.data});
     }
 
     goToMap(){

@@ -81,6 +81,6 @@ function formatDate (date) {
     let monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"];
 
-    return monthNames[date.getMonth() -1] + ' ' + date.getDay() + ', 20' + (date.getYear()-100);
+    return monthNames[date.getMonth()] + ' ' + date.getDate() + ', 20' + (date.getYear()-100);
 }
 export {formatDate}

@@ -26,6 +26,11 @@ export default class extends Component {
 
     componentWillReceiveProps (nextProps) {
 
+        //needed for refresh
+
+        this.setState({
+            items:nextProps.item
+        });
     }
 
     navigateToRate(item){
@@ -45,7 +50,8 @@ export default class extends Component {
                     this.state.items.map( (item, i) => {
                         if(item) {
                             return (
-                                <Button key={i} style={[inline.button, {flex:0.5}]}
+                                <Button key={i}
+                                        style={[inline.button, {flex:0.5}]}
                                         onPress={()=> {
                                             this.navigateToRate(item)
                                         }}>
@@ -93,7 +99,7 @@ const inline = StyleSheet.create({
     //     },
     //     shadowColor: '#000',
     //     shadowOpacity: 0.1,
-    //     borderRadius:3,
+    //     borderRadius:3,  
     // },
     imageBackground:{
         marginLeft:2.5,
@@ -118,7 +124,7 @@ const inline = StyleSheet.create({
         textAlign: 'center',
         fontSize:FONT_SIZE,
         marginBottom:-5,
-        fontWeight:'400',
+        fontWeight:'500',
         paddingLeft:30,
         paddingRight:30,
         color:"#fff",
@@ -128,7 +134,7 @@ const inline = StyleSheet.create({
             height: 0,
         },
         shadowColor: '#000',
-        shadowOpacity: 0.5,
+        shadowOpacity: 1,
         width:WINDOW_WIDTH/2-7.5,
     },
 });

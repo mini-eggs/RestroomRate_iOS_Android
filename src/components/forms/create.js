@@ -5,6 +5,7 @@ import Button from 'react-native-button'
 
 import API from '../../api/'
 import styles from './style'
+import ModalComp from '../modal/'
 
 export default class extends Component {
 
@@ -26,6 +27,7 @@ export default class extends Component {
         this.componentWillProcessState().then( () => {
             this.componentWillCreateRate();
         }).catch( (err) => {
+            Actions.changeModalMessage(err);
             Actions.modal.open();
         })
     }
@@ -54,15 +56,17 @@ export default class extends Component {
 
     componentWillProcessState(){
         return new Promise((yes,no)=>{
-            if(this.state.name.length > 0 && this.state.desc.length > 0) {                      //check strings
-                if(parseInt(this.state.rate) == this.state.rate) {                              //check rate
-                    if(parseInt(this.state.rate) > 0 && parseInt(this.state.rate) < 6) {        //check rate
-                        if(this.state.image.indexOf('https://i.imgur.com/') > -1) {             //check image
-                            yes();
-                        } else {no();}
-                    } else {no();}
-                } else {no();}
-            } else {no();}
+            if(typeof Actions.user != 'undefined'){
+                if(this.state.name.length > 0 && this.state.desc.length > 0) {                      //check strings
+                    if(parseInt(this.state.rate) == this.state.rate) {                              //check rate
+                        if(parseInt(this.state.rate) > 0 && parseInt(this.state.rate) < 6) {        //check rate
+                            if(this.state.image.indexOf('https://i.imgur.com/') > -1) {             //check image
+                                yes();
+                            } else {no('No image is present');}
+                        } else {no('Rate must be an integer from one (1) to five (5).');}
+                    } else {no('Rate must be an integer from one (1) to five (5).');}
+                } else {no('Check name and description of rate');}
+            } else {no('You must be logged in to complete this action.');}
         })
     }
 
@@ -137,7 +141,7 @@ export default class extends Component {
                                            style={[styles.textInput, {height:50}]}
                                            underlineColorAndroid="transparent"
                                            secureTextEntry = {false}
-                                           autoCapitalize="none"/>
+                                           autoCapitalize="words"/>
                                 <View style={styles.divider}/>
                             </View>
                             <View style={styles.inputContainer}>
@@ -145,7 +149,7 @@ export default class extends Component {
                                 <TextInput ref="rateInput"
                                            returnKeyType="next"
                                            maxLength={1}
-                                           keyboardType="default"
+                                           keyboardType="numeric"
                                            onChangeText={ (txt) => {this.setState({rate:txt})}}
                                            onSubmitEditing={(event) => {this.refs.descInput.focus()}}
                                            style={[styles.textInput, {height:40}]}
@@ -165,7 +169,7 @@ export default class extends Component {
                                            style={[styles.textInput, {height:100}]}
                                            secureTextEntry = {false}
                                            underlineColorAndroid="transparent"
-                                           autoCapitalize="none"/>
+                                           autoCapitalize="sentences"/>
                                 <View style={styles.divider}/>
                             </View>
                             <View style={{flex:1, flexDirection:'row'}}>

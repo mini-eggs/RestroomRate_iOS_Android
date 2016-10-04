@@ -32,4 +32,15 @@ export default StyleSheet.create({
     back:{
         tintColor:'#fff',
     },
+    leftIcon:{
+        height: 32,
+        resizeMode: 'contain',
+        marginLeft:-24,
+        marginTop:2,
+    },
+    rightIcon:{
+        height: 28,
+        resizeMode: 'contain',
+        marginRight:-24,
+    },
 });

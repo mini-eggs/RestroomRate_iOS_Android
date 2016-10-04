@@ -43,9 +43,11 @@ export default class extends Component {
 
             }).catch( (err) => {
                 Actions.toggleLoading();
+                Actions.changeModalMessage('Credentials not correct.');
                 Actions.modal.open();
             });
         } else {
+            Actions.changeModalMessage('Please make sure username and password are set.');
             Actions.modal.open();
         }
     }

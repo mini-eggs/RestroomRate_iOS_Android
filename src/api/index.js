@@ -148,43 +148,67 @@ const getDataSwitch = (plainObj) => {
 };
 
 const create = (plainObj) => {
-    return new Promise( (resolve, reject) => {
+    return new Promise( (complete, failure) => {
 
-        if(!(Actions.user)){reject('Please login to do that');}
+        let location = new Promise( (resolve,reject)=>{
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    Actions.location = {
+                        lat: position.coords.latitude,
+                        long: position.coords.longitude
+                    };
+                    resolve(Actions.location);
+                },
+                (error) => {
+                    console.log('using fake location');
+                    Actions.location = {
+                        lat: 44,
+                        long: -109
+                    };
+                    resolve(Actions.location);
+                },
+                {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
+            );
+        });
 
-        let data = {
-            name:plainObj.name,
-            rate:plainObj.rate,
-            desc:plainObj.description,
-            file:plainObj.image,
-            lat:Actions.location.lat,
-            long:Actions.location.long,
-            location:'Exact',
-            users_id:Actions.user.users_id
-        };
+        location.done( (loc) => {
 
-        data = serialize(data);
+            if(!(Actions.user)){failure('Please login to do that');}
 
-        let url = 'https://restroomrate.herokuapp.com/api/create/?' + data;
+            let data = {
+                name:plainObj.name,
+                rate:plainObj.rate,
+                desc:plainObj.description,
+                file:plainObj.image,
+                lat:loc.lat,
+                long:loc.long,
+                location:'Exact',
+                users_id:Actions.user.users_id
+            };
 
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-        }).then(function(response){
-            response.json().then(function(data){
-                if(parseInt(data.status) == 1){
-                    resolve(data.data);
-                } else {
-                    reject(data);
-                }
+            data = serialize(data);
+
+            let url = 'https://restroomrate.herokuapp.com/api/create/?' + data;
+
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            }).then(function(response){
+                response.json().then(function(data){
+                    if(parseInt(data.status) == 1){
+                        complete(data.data);
+                    } else {
+                        failure(data);
+                    }
+                }).catch( (err) => {
+                    failure(err);
+                });
             }).catch( (err) => {
-                reject(err);
+                failure(err);
             });
-        }).catch( (err) => {
-            reject(err);
         });
     });
 };

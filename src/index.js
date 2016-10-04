@@ -12,7 +12,8 @@ import ActionSheetComp from './components/shared/actionSheet'
 import PhotoComp from './components/photo/'
 
 import inline from './style'
-
+import AccountIcon from './assets/ic_account_circle_white_3x.png'
+import MenuIcon from './assets/ic_menu_white_3x.png'
 import API from './api/'
 
 export default class restrate extends Component {
@@ -104,39 +105,39 @@ export default class restrate extends Component {
                                title="Recent"
                                type="reset"
                                component={ListComp}
-                               rightTitle="&#10070;"
-                               leftTitle="&equiv;"
                                onRight={() => this.handleMenuClick()}
                                onLeft={() => this.handleMapClick()}
                                titleStyle={inline.title}
-                               leftButtonTextStyle={inline.optionLeft}
-                               rightButtonTextStyle={inline.optionRight}
                                navigationBarStyle={inline.navbar}
+                               leftButtonIconStyle={inline.leftIcon}
+                               rightButtonIconStyle={inline.rightIcon}
+                               leftButtonImage={MenuIcon}
+                               rightButtonImage={AccountIcon}
                                initial/>
                         <Scene key="ListCompNearby"                                 //LIST COMPONENT
                                title="Nearby"
                                type="reset"
                                component={ListComp}
-                               rightTitle="&#10070;"
-                               leftTitle="&equiv;"
                                onRight={() => this.handleMenuClick()}
                                onLeft={() => this.handleMapClick()}
                                titleStyle={inline.title}
-                               leftButtonTextStyle={inline.optionLeft}
-                               rightButtonTextStyle={inline.optionRight}
-                               navigationBarStyle={inline.navbar}/>
+                               navigationBarStyle={inline.navbar}
+                               leftButtonIconStyle={inline.leftIcon}
+                               rightButtonIconStyle={inline.rightIcon}
+                               leftButtonImage={MenuIcon}
+                               rightButtonImage={AccountIcon}/>
                         <Scene key="ListCompYours"                                  //LIST COMPONENT
                                title="Yours"
                                type="reset"
                                component={ListComp}
-                               rightTitle="&#10070;"
-                               leftTitle="&equiv;"
                                onRight={() => this.handleMenuClick()}
                                onLeft={() => this.handleMapClick()}
                                titleStyle={inline.title}
-                               leftButtonTextStyle={inline.optionLeft}
-                               rightButtonTextStyle={inline.optionRight}
-                               navigationBarStyle={inline.navbar}/>
+                               navigationBarStyle={inline.navbar}
+                               leftButtonIconStyle={inline.leftIcon}
+                               rightButtonIconStyle={inline.rightIcon}
+                               leftButtonImage={MenuIcon}
+                               rightButtonImage={AccountIcon}/>
                         <Scene key="SingleComp"                                     //SINGLE COMPONENT
                                navigationBarStyle={inline.navbar}
                                leftButtonIconStyle={inline.back}

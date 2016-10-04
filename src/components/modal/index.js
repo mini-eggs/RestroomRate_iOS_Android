@@ -18,6 +18,11 @@ export default class extends Component {
         };
     }
 
+    componentWillReceiveProps(nextProps){
+
+        this.setState({message:nextProps.message});
+    }
+
     render() {
         return (
             <Modal position={"center"}
@@ -25,7 +30,7 @@ export default class extends Component {
                    style={[inline.modalGeneral, inline.modalSpecific]}
                    isDisabled={false}>
                 <View style={{flex:1}}>
-                    <View style={{flex:1, textAlign:'center', justifyContent:'center'}}>
+                    <View style={{flex:1, justifyContent:'center'}}>
                         <Text style={inline.modalText}>{this.state.message}</Text>
                         <View style={{height:20,}}></View>
                         <View style={inline.btnShadow}>

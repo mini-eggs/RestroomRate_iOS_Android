@@ -18,8 +18,11 @@ export default class extends Component {
 
         super(props);
 
+        Actions['changeModalMessage'] = (msg) => { this.setState({errorMessage:msg}); };
+
         this.state = {
-            title:capitalizeFirstLetter(props.data)
+            title:capitalizeFirstLetter(props.data),
+            errorMessage:'Something went wrong.'
         };
     }
 
@@ -59,7 +62,7 @@ export default class extends Component {
                                     <Text>No data</Text>
                     }
                 </ScrollView>
-                <ModalComp message="Info not complete. Make sure user is logged in."/>
+                <ModalComp message={this.state.errorMessage}/>
             </View>
         );
     }

@@ -45,9 +45,11 @@ export default class extends Component {
 
             }).catch( (err) => {
                 Actions.toggleLoading();
+                Actions.changeModalMessage('Credentials are in use already.');
                 Actions.modal.open();
             })
         } else {
+            Actions.changeModalMessage('Please make sure a username, email, and password are set.');
             Actions.modal.open();
         }
     }
@@ -76,7 +78,7 @@ export default class extends Component {
                                 </View>
                                 <View style={styles.inputContainer}>
                                     <Text style={styles.formText}>Email</Text>
-                                    <TextInput keyboardType="default"
+                                    <TextInput keyboardType="email-address"
                                                ref="email"
                                                returnKeyType="next"
                                                onChangeText={ (txt) => {this.setState({email:txt}); }}

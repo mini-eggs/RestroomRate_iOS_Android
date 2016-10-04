@@ -25,7 +25,7 @@ export default class extends Component {
                    style={[inline.modalGeneral, inline.modalSpecific]}
                    isDisabled={false}>
                 <View style={{flex:1}}>
-                    <View style={{flex:1, justifyContent:'center'}}>
+                    <View style={{flex:1, textAlign:'center', justifyContent:'center'}}>
                         <Text style={inline.modalText}>{this.state.message}</Text>
                         <View style={{height:20,}}></View>
                         <View style={inline.btnShadow}>
@@ -54,6 +54,7 @@ const inline = StyleSheet.create({
     },
     modalText:{
         fontSize:22,
+        textAlign:'center',
     },
     btnShadow:{
         shadowOffset:{

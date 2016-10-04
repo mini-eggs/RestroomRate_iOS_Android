@@ -58,7 +58,7 @@ export default StyleSheet.create({
         shadowOpacity: 0.10,
     },
     formInner:{
-        padding:50,
+        padding:20,
     },
     formText:{
         fontSize:16,

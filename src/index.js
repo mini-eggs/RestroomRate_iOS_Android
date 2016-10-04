@@ -105,7 +105,7 @@ export default class restrate extends Component {
                                type="reset"
                                component={ListComp}
                                rightTitle="&#10070;"
-                               leftTitle="&#9776;"
+                               leftTitle="&equiv;"
                                onRight={() => this.handleMenuClick()}
                                onLeft={() => this.handleMapClick()}
                                titleStyle={inline.title}
@@ -118,7 +118,7 @@ export default class restrate extends Component {
                                type="reset"
                                component={ListComp}
                                rightTitle="&#10070;"
-                               leftTitle="&#9776;"
+                               leftTitle="&equiv;"
                                onRight={() => this.handleMenuClick()}
                                onLeft={() => this.handleMapClick()}
                                titleStyle={inline.title}
@@ -130,7 +130,7 @@ export default class restrate extends Component {
                                type="reset"
                                component={ListComp}
                                rightTitle="&#10070;"
-                               leftTitle="&#9776;"
+                               leftTitle="&equiv;"
                                onRight={() => this.handleMenuClick()}
                                onLeft={() => this.handleMapClick()}
                                titleStyle={inline.title}

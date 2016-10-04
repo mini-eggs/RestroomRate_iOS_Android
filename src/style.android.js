@@ -20,14 +20,14 @@ export default StyleSheet.create({
     optionLeft:{
         color:'#fff',
         fontWeight:"600",
-        fontSize:24,
-        marginTop:-5,
+        fontSize:42,
+        marginTop:-17,
     },
     optionRight:{
         color:'#fff',
         fontWeight:"600",
-        fontSize:24,
-        marginTop:-7,
+        fontSize:30,
+        marginTop:-12,
     },
     back:{
         tintColor:'#fff',

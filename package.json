@@ -1,12 +1,11 @@
 {
   "name": "RestroomRate",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
-    "build": "(cd android/ && ./gradlew assembleDebug)",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "bundle-android": "react-native bundle --platform android --dev false --entry-file index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --sourcemap-output android/app/src/main/assets/index.android.map --assets-dest android/app/src/main/res/",
-    "github":"git add . && git commit -m \"commit message here\" && git push -u origin master && git rm -r --cached . && git add . && git commit -m \"commit message here\" && git checkout --orphan latest_branch && git add -A && git commit -am \"commit message here\" && git branch -D master && git branch -m master && git push -f origin master"
+    "github":"git add . && git commit -m \"commit message here\" && git push -u origin master && git rm -r --cached . && git add . && git commit -m \"commit message here\" && git checkout --orphan latest_branch && git add -A && git commit -am \"commit message here\" && git branch -D master && git branch -m master && git push -f origin master",
+    "deploy-android":"cd android && ./gradlew assembleRelease && cd .. "
   },
   "dependencies": {
     "react": "15.3.2",

@@ -59,7 +59,7 @@ export default class extends Component {
                                     <Text>No data</Text>
                     }
                 </ScrollView>
-                <ModalComp message="info not complete"/>
+                <ModalComp message="Info not complete. Make sure user is logged in."/>
             </View>
         );
     }

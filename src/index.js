@@ -10,6 +10,7 @@ import FormComp from './components/forms/'
 import MapComp from './components/map/'
 import ActionSheetComp from './components/shared/actionSheet'
 import PhotoComp from './components/photo/'
+import AboutComp from './components/about/'
 
 import inline from './style'
 import AccountIcon from './assets/ic_account_circle_white_3x.png'
@@ -75,7 +76,7 @@ export default class restrate extends Component {
         API.autoLogin().then( (usr) => {
 
             Actions.changeUser(usr);
-        });
+        }).catch((err)=>{});
     }
 
     handleMenuClick(){
@@ -158,6 +159,13 @@ export default class restrate extends Component {
                         <Scene key="FormComp"                                       //FORM COMPONENT
                                hideNavBar={true}
                                component={FormComp}/>
+                        <Scene titleStyle={inline.title}                            //ABOUT COMPONENT
+                               key="AboutComp"
+                               title="About"
+                               hideNavBar={false}
+                               navigationBarStyle={inline.navbar}
+                               component={AboutComp}
+                               leftButtonIconStyle={inline.back}/>
                     </Scene>
                 </Router>
             </View>

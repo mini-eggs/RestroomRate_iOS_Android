@@ -6,6 +6,7 @@ import {Actions} from 'react-native-router-flux'
 
 import API from '../../api/'
 
+const WINDOW_WIDTH = Dimensions.get('window').width;
 const WINDOW_HEIGHT = Dimensions.get('window').height;
 const IMAGE_HEIGHT = WINDOW_HEIGHT / 2.5;
 
@@ -53,11 +54,20 @@ export default class extends Component {
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={inline.background}>
                         <Image style={[{height:IMAGE_HEIGHT}, inline.image]} source={{uri:fixImageURL(this.state.item.rate_file)}} />
+
+
+                        <View style={{height:0, width:WINDOW_WIDTH, marginBottom:-50}} />
+
+
                         <View style={inline.center}>
                             <View style={inline.circle}>
                                 <Text style={inline.circleText}>{this.state.item.rate_rate}/5</Text>
                             </View>
                         </View>
+
+
+
+
                         <View style={inline.paddingTop}>
                             <View style={inline.card}>
                                 <Text style={{fontSize:28,marginBottom:10,}}>{this.state.item.rate_name}</Text>
@@ -110,7 +120,7 @@ const inline = StyleSheet.create({
         backgroundColor:'#f1f1f1',
     },
     paddingTop:{
-        paddingTop:75,
+        paddingTop:25,
     },
     card:{
         backgroundColor:"#fff",
@@ -133,8 +143,6 @@ const inline = StyleSheet.create({
     },
     circle:{
         borderWidth:4,
-        marginTop:-50,
-        marginBottom:-50,
         borderColor:'#fff',
         borderRadius:50,
         backgroundColor:'#4c6ef5',

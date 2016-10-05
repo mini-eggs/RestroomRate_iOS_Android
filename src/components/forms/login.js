@@ -62,7 +62,7 @@ export default class extends Component {
                         <View style={styles.formInner}>
                             <View style={styles.inputContainer}>
                                 <Text style={styles.formText}>Username</Text>
-                                <TextInput maxLength={14}
+                                <TextInput maxLength={28}
                                            ref="username"
                                            keyboardType="default"
                                            returnKeyType="next"
@@ -76,7 +76,7 @@ export default class extends Component {
                             </View>
                             <View style={styles.inputContainer}>
                                 <Text style={styles.formText}>Password</Text>
-                                <TextInput maxLength={14}
+                                <TextInput maxLength={28}
                                            ref="password"
                                            keyboardType="default"
                                            returnKeyType="done"

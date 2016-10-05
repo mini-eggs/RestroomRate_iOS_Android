@@ -99,7 +99,7 @@ const inline = StyleSheet.create({
     //     },
     //     shadowColor: '#000',
     //     shadowOpacity: 0.1,
-    //     borderRadius:3,  
+    //     borderRadius:3,
     // },
     imageBackground:{
         marginLeft:2.5,

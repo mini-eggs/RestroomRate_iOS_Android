@@ -12,17 +12,17 @@ export default class extends Component {
         super(props);
 
         this.state = {
-            forms:['Login','Register','Cancel'],
-            formsAlt:['Logout','Cancel'],
-            options:['Submit', 'Nearby','Recent','Yours','Switch to Map', 'Cancel']
+            forms:['Login','Register','About','Cancel'],
+            formsAlt:['Logout','About','Cancel'],
+            options:['Submit', 'Nearby','Recent','Yours', 'Cancel']
         };
     }
 
     componentWillReceiveProps(nextProps){
 
         this.setState({
-            forms:['Login','Register','Cancel'],
-            formsAlt:['Logout','Cancel'],
+            forms:['Login','Register','About','Cancel'],
+            formsAlt:['Logout','About','Cancel'],
             options:['Submit', 'Nearby','Recent','Yours', 'Cancel']
         });
     }
@@ -37,6 +37,9 @@ export default class extends Component {
                 Actions.FormComp('Register');
                 break;
             case 2:
+                Actions.AboutComp();
+                break;
+            case 3:
                 break;
         }
     }
@@ -49,6 +52,9 @@ export default class extends Component {
                 Actions.ListCompRecent();
                 break;
             case 1:
+                Actions.AboutComp();
+                break;
+            case 2:
                 break;
         }
     }
@@ -81,13 +87,13 @@ export default class extends Component {
                 <ActionSheet
                     ref={(o) => Actions.ActionSheet.homepageUserLoggedOut = o}
                     options={this.state.forms}
-                    cancelButtonIndex={2}
+                    cancelButtonIndex={3}
                     onPress={(index)=>{this.userAction(index)}}
                 />
                 <ActionSheet
                     ref={(o) => Actions.ActionSheet.homepageUserLoggedIn = o}
                     options={this.state.formsAlt}
-                    cancelButtonIndex={1}
+                    cancelButtonIndex={2}
                     onPress={(index)=>{this.userActionAlt(index)}}
                 />
                 <ActionSheet

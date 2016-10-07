@@ -6,6 +6,7 @@ import Button from 'react-native-button'
 import API from '../../api/'
 import styles from './style'
 import ModalComp from '../modal/'
+import {purifyUserInput} from '../../methods/'
 
 export default class extends Component {
 
@@ -37,8 +38,8 @@ export default class extends Component {
         Actions.toggleLoading();
 
         API.create({
-            name:this.state.name,
-            description:this.state.desc,
+            name:           purifyUserInput(this.state.name),
+            description:    purifyUserInput(this.state.desc),
             rate:this.state.rate,
             image:this.state.image,
         }).then( () => {
@@ -46,7 +47,8 @@ export default class extends Component {
             this.setState({name:'', desc:'', rate:'', image:'',});
 
             Actions.toggleLoading();
-            Actions.ListCompRecent();
+            Actions.forceListRefresh();
+            Actions.pop();
 
         }).catch( (err) => {
             Actions.toggleLoading();

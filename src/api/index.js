@@ -1,6 +1,10 @@
 
 const DeviceInfo = require('react-native-device-info');
 
+const Domain = "https://restroomrate.herokuapp.com";
+
+// const Domain = "http://localhost:8080";
+
 import {Actions} from 'react-native-router-flux'
 
 const serialize = function(obj, prefix) {
@@ -20,7 +24,7 @@ const register = function(Obj){
     return new Promise(function(resolve, reject){
         Obj.device = DeviceInfo.getUniqueID();
         let data = serialize(Obj);
-        let url = 'https://restroomrate.herokuapp.com/api/register/?' + data;
+        let url = Domain + '/api/register/?' + data;
         fetch(url, {
             method: 'GET',
             headers: {
@@ -43,7 +47,7 @@ const login = function(Obj){
     return new Promise(function(resolve, reject){
         Obj.device = DeviceInfo.getUniqueID();
         let data = serialize(Obj);
-        let url = 'https://restroomrate.herokuapp.com/api/login/?' + data;
+        let url = Domain + '/api/login/?' + data;
         fetch(url, {
             method: 'GET',
             headers: {
@@ -66,7 +70,7 @@ const logout = function(Obj){
     return new Promise(function(resolve, reject){
         Obj.device = DeviceInfo.getUniqueID();
         let data = serialize(Obj);
-        let url = 'https://restroomrate.herokuapp.com/api/logout/?' + data;
+        let url = Domain + '/api/logout/?' + data;
         fetch(url, {
             method: 'GET',
             headers: {
@@ -90,7 +94,7 @@ const autoLogin = function(){
         let Obj = {};
         Obj.device = DeviceInfo.getUniqueID();
         let data = serialize(Obj);
-        let url = 'https://restroomrate.herokuapp.com/api/checkLogin/?' + data;
+        let url = Domain + '/api/checkLogin/?' + data;
         fetch(url, {
             method: 'GET',
             headers: {
@@ -115,13 +119,14 @@ const getDataSwitch = (plainObj) => {
         if(!(Actions.location)){reject('Locations are not enabled')}
 
         let url =
-            'https://restroomrate.herokuapp.com/api/data/' +
+            Domain + '/api/data/' +
             '?type=' + plainObj.type +
             '&page=' + plainObj.page +
             '&length=' + plainObj.length +
             '&lat=' + plainObj.location.lat +
             '&long=' + plainObj.location.long +
-            '&users_id=' + plainObj.users_id;
+            '&users_id=' + plainObj.users_id +
+            '&device=' + DeviceInfo.getUniqueID();
 
         console.log(url);
 
@@ -188,7 +193,7 @@ const create = (plainObj) => {
 
             data = serialize(data);
 
-            let url = 'https://restroomrate.herokuapp.com/api/create/?' + data;
+            let url = Domain + '/api/create/?' + data;
 
             fetch(url, {
                 method: 'GET',
@@ -225,9 +230,7 @@ const deleteItem = (plainObj) => {
 
         data = serialize(data);
 
-        let url = 'https://restroomrate.herokuapp.com/api/delete/?' + data;
-
-        console.log(url);
+        let url = Domain + '/api/delete/?' + data;
 
         fetch(url, {
             method: 'GET',
@@ -251,6 +254,46 @@ const deleteItem = (plainObj) => {
     });
 };
 
+const userReportHideBlock = (type) => {
+
+  let data = {
+    id:       (Actions.currentContent) ? Actions.currentContent.rate_id : -1,
+    user:     (Actions.user) ? Actions.user.users_id : -1,
+    device:   DeviceInfo.getUniqueID(),
+    type:     type
+  }
+
+  data = serialize(data);
+
+  let url = Domain + '/api/report/?' + data;
+
+  return new Promise( (resolve,reject) => {
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+    }).then(function(response){
+        response.json().then(function(data){
+
+            console.log(data);
+
+            if(parseInt(data.status) == 1){
+                resolve(data.data);
+            } else {
+                reject(data);
+            }
+        }).catch( (err) => {
+            reject(err);
+        });
+    }).catch( (err) => {
+        reject(err);
+    });
+  });
+}
+
 export default {
     login:login,
     register:register,
@@ -258,5 +301,6 @@ export default {
     autoLogin:autoLogin,
     getDataSwitch:getDataSwitch,
     create:create,
-    deleteItem:deleteItem
+    deleteItem:deleteItem,
+    userReportHideBlock:userReportHideBlock
 }

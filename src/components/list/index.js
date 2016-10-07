@@ -17,6 +17,8 @@ export default class extends Component {
 
         Actions.toggleLoading();
 
+        Actions['forceListRefresh'] = () => {this.refresh()}
+
         this.state = {
             sort:props.title,
             page:-1,
@@ -37,6 +39,9 @@ export default class extends Component {
     }
 
     refresh(){
+
+      console.warn("refreshing list");
+
         this.setState({
             canLoadMore:false,
             page:0,

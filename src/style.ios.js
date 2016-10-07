@@ -45,4 +45,9 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         marginRight:-24,
     },
+    reportIcon:{
+          height: 28,
+          resizeMode: 'contain',
+          marginRight:0,
+    },
 });

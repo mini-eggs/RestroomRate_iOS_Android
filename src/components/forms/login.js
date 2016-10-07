@@ -39,7 +39,8 @@ export default class extends Component {
 
                 Actions.toggleLoading();
                 Actions.changeUser(user);
-                Actions.ListCompRecent();
+                Actions.forceListRefresh();
+                Actions.pop();
 
             }).catch( (err) => {
                 Actions.toggleLoading();

@@ -8,6 +8,7 @@
     "deploy-android": "cd android && ./gradlew assembleRelease && cd .. "
   },
   "dependencies": {
+    "bad-words": "^1.4.2",
     "react": "15.3.2",
     "react-native": "0.34.1",
     "react-native-actionsheet": "^2.0.3",

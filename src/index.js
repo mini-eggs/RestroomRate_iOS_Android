@@ -11,10 +11,12 @@ import MapComp from './components/map/'
 import ActionSheetComp from './components/shared/actionSheet'
 import PhotoComp from './components/photo/'
 import AboutComp from './components/about/'
+import EulaComp from './components/eula/'
 
 import inline from './style'
 import AccountIcon from './assets/ic_account_circle_white_3x.png'
 import MenuIcon from './assets/ic_menu_white_3x.png'
+import ReportIcon from './assets/ic_feedback_white_24dp/web/ic_feedback_white_24dp_1x.png'
 import API from './api/'
 
 export default class restrate extends Component {
@@ -38,10 +40,11 @@ export default class restrate extends Component {
 
         StatusBar.setBarStyle('light-content', true);
         StatusBar.setBackgroundColor('#4c6ef5');
-        // StatusBar.setBarStyle('default', true);
     }
 
     componentWillRenderActions(){
+
+        Actions['currentContent'] = null;
 
         Actions['modal'] = null;
 
@@ -58,7 +61,9 @@ export default class restrate extends Component {
 
         Actions['ActionSheet'] = {
             homepageUserLoggedIn:null,
-            homepageUserLoggedOut:null
+            homepageUserLoggedOut:null,
+            options:null,
+            report:null
         };
 
         Actions['logoutUser'] = () => {
@@ -92,6 +97,11 @@ export default class restrate extends Component {
     handleMapClick(){
 
         Actions.ActionSheet.options.show();
+    }
+
+    handleReportClick(){
+
+        Actions.ActionSheet.report.show();
     }
 
     render() {
@@ -143,6 +153,9 @@ export default class restrate extends Component {
                                navigationBarStyle={inline.navbar}
                                leftButtonIconStyle={inline.back}
                                titleStyle={inline.title}
+                               rightButtonIconStyle={inline.reportIcon}
+                               rightButtonImage={ReportIcon}
+                               onRight={() => this.handleReportClick()}
                                component={SingleComp}/>
                         <Scene titleStyle={inline.title}                            //MAP COMPONENT
                                key="MapComp"
@@ -165,6 +178,13 @@ export default class restrate extends Component {
                                hideNavBar={false}
                                navigationBarStyle={inline.navbar}
                                component={AboutComp}
+                               leftButtonIconStyle={inline.back}/>
+                        <Scene titleStyle={inline.title}                            //EULA COMPONENT
+                               key="EulaComp"
+                               title="EULA"
+                               hideNavBar={false}
+                               navigationBarStyle={inline.navbar}
+                               component={EulaComp}
                                leftButtonIconStyle={inline.back}/>
                     </Scene>
                 </Router>

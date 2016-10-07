@@ -1,6 +1,14 @@
 import {Actions} from 'react-native-router-flux'
 import API from '../api/'
 
+const Filter = require('bad-words');
+const filter = new Filter();
+
+function purifyUserInput(String){
+  return filter.clean(String);
+}
+export {purifyUserInput}
+
 function capitalizeFirstLetter(string) {
 
     return string.charAt(0).toUpperCase() + string.slice(1);

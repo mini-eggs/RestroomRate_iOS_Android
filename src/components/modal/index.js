@@ -14,13 +14,20 @@ export default class extends Component {
         super(props);
 
         this.state = {
-            message:props.message
+            message:props.message,
+            onComplete:(props.onComplete) ? props.onComplete : () => {}
         };
     }
 
     componentWillReceiveProps(nextProps){
 
         this.setState({message:nextProps.message});
+    }
+
+    componentWillComplete(){
+
+      Actions.modal.close()
+      this.state.onComplete();
     }
 
     render() {
@@ -35,7 +42,7 @@ export default class extends Component {
                         <View style={{height:20,}}></View>
                         <View style={inline.btnShadow}>
                             <View style={inline.btnView}>
-                                <Button style={inline.btn} onPress={() => {Actions.modal.close()}}>dismiss</Button>
+                                <Button style={inline.btn} onPress={() => {this.componentWillComplete()}}>dismiss</Button>
                             </View>
                         </View>
                     </View>

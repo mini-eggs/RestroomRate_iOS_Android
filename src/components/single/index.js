@@ -5,6 +5,7 @@ import Button from 'react-native-button'
 import {Actions} from 'react-native-router-flux'
 
 import API from '../../api/'
+import ModalComp from '../modal/'
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 const WINDOW_HEIGHT = Dimensions.get('window').height;
@@ -16,14 +17,24 @@ export default class extends Component {
 
         super(props);
 
+        Actions.currentContent = props.data
+
+        Actions['changeModalMessage'] = (msg) => { this.setState({modalMessage:msg}); };
+
         this.state = {
-            item:props.data
+            item:props.data,
+            modalMessage: "Something went wrong"
         };
     }
 
     componentWillReceiveProps(nextProps){
 
-        this.setState({item:nextProps.data});
+        Actions.currentContent = nextProps.data
+
+        this.setState({
+          item:nextProps.data,
+          modalMessage: "Something went wrong"
+        });
     }
 
     goToMap(){
@@ -109,6 +120,7 @@ export default class extends Component {
                     </View>
                     <View style={{height:150}}></View>
                 </ScrollView>
+                <ModalComp onComplete={ () => {Actions.pop()} } message={this.state.modalMessage} />
             </View>
         )
     }
